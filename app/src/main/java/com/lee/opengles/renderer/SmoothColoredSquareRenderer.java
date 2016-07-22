@@ -8,7 +8,7 @@ import javax.microedition.khronos.opengles.GL10;
  * ClassName: SmoothColoredSquareRenderer
  * Description TODO SmoothColoredSquareRenderer
  * Auther lijun lee mingyangnc@163.com
- * Date 2016/7/22 15:47
+ * Date 2016/7/22 15:48
  */
 public class SmoothColoredSquareRenderer extends OpenGLRenderer {
 
