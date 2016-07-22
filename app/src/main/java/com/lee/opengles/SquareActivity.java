@@ -4,6 +4,7 @@ import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.lee.opengles.renderer.OpenGLRenderer;
 import com.lee.opengles.renderer.SmoothColoredSquareRenderer;
 
 public class SquareActivity extends AppCompatActivity {

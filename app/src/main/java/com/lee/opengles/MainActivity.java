@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.add(new Example("Example", ExampleActivity.class));
         mExampleList.add(new Example("Square", SquareActivity.class));
         mExampleList.add(new Example("Cube", CubeActivity.class));
+        mExampleList.add(new Example("SimpleTexture", SimpleTextureActivity.class));
 
         mExampleRv.setLayoutManager(new LinearLayoutManager(this));
         mExampleRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));

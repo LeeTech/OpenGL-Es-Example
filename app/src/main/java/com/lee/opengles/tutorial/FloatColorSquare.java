@@ -1,6 +1,6 @@
 package com.lee.opengles.tutorial;
 
-import javax.microedition.khronos.opengles.GL10;
+import com.lee.opengles.mesh.Plane;
 
 /**
  * ClassName: FloatColorSquare
@@ -8,10 +8,11 @@ import javax.microedition.khronos.opengles.GL10;
  * Auther lijun lee mingyangnc@163.com
  * Date 2016/7/14 15:41
  */
-public class FloatColorSquare extends Square {
-    @Override
-    public void draw(GL10 gl) {
-        gl.glColor4f(0.5f, 0.5f, 1f, 1f);
-        super.draw(gl);
+public class FloatColorSquare extends Plane {
+
+
+    public FloatColorSquare() {
+        super(3, 3);
+        setColor(0.5f, 0.5f, 1f, 1f);
     }
 }

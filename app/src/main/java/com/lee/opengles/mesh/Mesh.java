@@ -1,5 +1,8 @@
 package com.lee.opengles.mesh;
 
+import android.graphics.Bitmap;
+import android.opengl.GLUtils;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -21,6 +24,9 @@ public class Mesh {
     // 顶点绘制顺序定义
     private ShortBuffer mIndicesBuffer = null;
 
+    // 材质渲染UV坐标定义
+    private FloatBuffer mTextureBuffer;
+
     private int mNumOfIndices = -1;
 
     // 颜色定义
@@ -28,6 +34,15 @@ public class Mesh {
 
     // 颜色矩阵定义
     private FloatBuffer mColorBuffer = null;
+
+    // 材质id,通过此id绑定,并渲染此材质
+    private int mTextureId = -1;
+
+    // 需要渲染的bitmap对象
+    private Bitmap mTextureBitmap;
+
+    // 是否渲染材质
+    private boolean mShouldLoadTexture = false;
 
     // 平移参数
     public float x = 0;
@@ -64,6 +79,18 @@ public class Mesh {
 
         }
 
+        if (mShouldLoadTexture) {
+            loadGLTexture(gl);
+            mShouldLoadTexture = false;
+        }
+
+        if (mTextureId != -1 && mTextureBuffer != null) {
+            // 启用材质渲染
+            gl.glEnable(GL10.GL_TEXTURE_2D);
+            gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+            gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTextureBuffer);
+        }
+
         gl.glTranslatef(x, y, z);
 
         gl.glRotatef(rx, 1.0f, 0.0f, 0.0f);
@@ -77,6 +104,10 @@ public class Mesh {
         gl.glDrawElements(GL10.GL_TRIANGLES, mNumOfIndices, GL10.GL_UNSIGNED_SHORT, mIndicesBuffer);
 
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+
+        if (mTextureId != -1 && mTextureBuffer != null) {
+            gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+        }
 
         gl.glDisable(GL10.GL_CULL_FACE);
     }
@@ -121,4 +152,57 @@ public class Mesh {
         mColorBuffer.position(0);
     }
 
+    /**
+     * 设置材质渲染坐标
+     *
+     * @param textureCoordinates
+     */
+    protected void setTextureCoordinates(float[] textureCoordinates) {
+        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(textureCoordinates.length * 4);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        mTextureBuffer = byteBuffer.asFloatBuffer();
+        mTextureBuffer.put(textureCoordinates);
+        mTextureBuffer.position(0);
+    }
+
+    /**
+     * 设置材质渲染位图
+     *
+     * @param textureBitmap
+     */
+    public void loadTextureBitmap(Bitmap textureBitmap) {
+        this.mTextureBitmap = textureBitmap;
+        mShouldLoadTexture = true;
+    }
+
+    /**
+     * 加载材质
+     *
+     * @param gl
+     */
+    private void loadGLTexture(GL10 gl) {
+        int[] textures = new int[1];
+        // 生成材质,只生成一个
+        gl.glGenTextures(1, textures, 0);
+        mTextureId = textures[0];
+        // 通过id绑定此材质
+        gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureId);
+        // 设置填充材质参数
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
+        gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_REPEAT);
+
+        /**
+         * target ---- 操作的目标类型，设为 GL_TEXTURE_2D 即可
+
+         level ---- 表示多级分辨率的纹理图像的级数，若只有一种分辨率，则level设为0
+
+         bitmap ---- 图像
+
+         border ---- 边框，一般设为0
+         */
+        GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, mTextureBitmap, 0);
+    }
 }
