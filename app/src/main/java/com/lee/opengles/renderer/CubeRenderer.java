@@ -1,14 +1,7 @@
 package com.lee.opengles.renderer;
 
-import android.opengl.GLSurfaceView;
-import android.opengl.GLU;
-
 import com.lee.opengles.mesh.Cube;
-import com.lee.opengles.mesh.Group;
-import com.lee.opengles.mesh.Mesh;
-import com.lee.opengles.mesh.Plane;
 
-import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
@@ -29,9 +22,8 @@ public class CubeRenderer extends OpenGLRenderer {
 
     @Override
     public void onDrawFrame(GL10 gl10) {
-        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-        gl10.glLoadIdentity();
-        gl10.glTranslatef(0, 0, -4);
+        super.onDrawFrame(gl10);
+        gl10.glTranslatef(0, 0, 6);
         getRoot().draw(gl10);
     }
 }

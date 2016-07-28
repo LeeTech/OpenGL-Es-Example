@@ -8,11 +8,27 @@ import com.lee.opengles.renderer.CubeRenderer;
 
 public class CubeActivity extends AppCompatActivity {
 
+
+    private GLSurfaceView glSurfaceView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GLSurfaceView glSurfaceView = new GLSurfaceView(this);
+        glSurfaceView = new GLSurfaceView(this);
         glSurfaceView.setRenderer(new CubeRenderer());
         setContentView(glSurfaceView);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        glSurfaceView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        glSurfaceView.onPause();
     }
 }

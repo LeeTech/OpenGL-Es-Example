@@ -3,16 +3,10 @@ package com.lee.opengles.renderer;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.opengl.GLSurfaceView;
-import android.opengl.GLU;
 
 import com.lee.opengles.R;
-import com.lee.opengles.mesh.Cube;
-import com.lee.opengles.mesh.Group;
-import com.lee.opengles.mesh.Mesh;
 import com.lee.opengles.mesh.TexturePlane;
 
-import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
