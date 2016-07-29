@@ -20,7 +20,11 @@
         <activity android:name=".ExampleActivity" />
         <activity android:name=".SimpleTextureActivity" />
         <activity android:name=".DrawPointActivity" />
-        <activity android:name=".LineSegmentActivity"></activity>
+        <activity android:name=".LineSegmentActivity" />
+        <activity android:name=".TrianglesActivity" />
+        <activity android:name=".Icosahedron" />
+        <activity android:name=".IcosahedronActivity" />
+        <activity android:name=".StarActivity"></activity>
     </application>
 
 </manifest>

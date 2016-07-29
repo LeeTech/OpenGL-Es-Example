@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.add(new Example("SimpleTexture", SimpleTextureActivity.class));
         mExampleList.add(new Example("Point", DrawPointActivity.class));
         mExampleList.add(new Example("LineSegment", LineSegmentActivity.class));
+        mExampleList.add(new Example("Triangles", TrianglesActivity.class));
+        mExampleList.add(new Example("Icosahedron", IcosahedronActivity.class));
+        mExampleList.add(new Example("Star", StarActivity.class));
 
         mExampleRv.setLayoutManager(new LinearLayoutManager(this));
         mExampleRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
