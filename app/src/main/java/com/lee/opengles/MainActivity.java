@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mExampleList.add(new Example("Triangles", TrianglesActivity.class));
         mExampleList.add(new Example("Icosahedron", IcosahedronActivity.class));
         mExampleList.add(new Example("Star", StarActivity.class));
+        mExampleList.add(new Example("Sphere", SphereActivity.class));
+        mExampleList.add(new Example("Lighting", LightingActivity.class));
 
         mExampleRv.setLayoutManager(new LinearLayoutManager(this));
         mExampleRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));

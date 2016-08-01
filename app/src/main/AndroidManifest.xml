@@ -24,7 +24,9 @@
         <activity android:name=".TrianglesActivity" />
         <activity android:name=".Icosahedron" />
         <activity android:name=".IcosahedronActivity" />
-        <activity android:name=".StarActivity"></activity>
+        <activity android:name=".StarActivity" />
+        <activity android:name=".SphereActivity" />
+        <activity android:name=".LightingActivity"></activity>
     </application>
 
 </manifest>
